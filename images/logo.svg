@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Coffee cup -->
+  <path d="M30,30 L70,30 L65,80 L35,80 Z" fill="#6F4E37" />
+  <!-- Cup handle -->
+  <path d="M70,40 Q85,40 85,55 Q85,70 70,70" fill="none" stroke="#6F4E37" stroke-width="5" />
+  <!-- Coffee steam -->
+  <path d="M40,25 Q45,15 50,25 Q55,15 60,25" fill="none" stroke="#D4A76A" stroke-width="3" stroke-linecap="round" />
+  <!-- AI circuit pattern -->
+  <circle cx="50" cy="55" r="10" fill="#D4A76A" opacity="0.7" />
+  <path d="M45,55 L55,55 M50,50 L50,60" stroke="#3C2A1E" stroke-width="2" />
+  <path d="M40,45 L60,65 M40,65 L60,45" stroke="#3C2A1E" stroke-width="1.5" opacity="0.7" />
+</svg>
