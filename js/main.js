@@ -18,26 +18,64 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Form submission
+// Form submission with Formspree
 document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.querySelector('#contact form');
+    const contactForm = document.querySelector('#contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const emailInput = contactForm.querySelector('input[type="email"]');
+            
             if (emailInput && emailInput.value) {
-                // In a real implementation, you would send this to your backend
-                console.log(`Email submitted: ${emailInput.value}`);
-                
-                // Show success message
-                const formContainer = contactForm.parentElement;
-                formContainer.innerHTML = `
-                    <div class="py-8 text-center fade-in visible">
-                        <div class="text-3xl coffee-accent mb-4">☕</div>
-                        <h3 class="text-2xl font-semibold mb-3">Thanks for joining!</h3>
-                        <p class="text-gray-400">We'll notify you when we're ready to launch.</p>
-                    </div>
-                `;
+                try {
+                    // Get the form action URL (Formspree endpoint)
+                    const formAction = contactForm.getAttribute('action');
+                    
+                    // Check if we have a valid Formspree endpoint
+                    if (formAction && formAction !== 'https://formspree.io/f/your-formspree-id') {
+                        // Submit the form data to Formspree
+                        const formData = new FormData(contactForm);
+                        const response = await fetch(formAction, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                        
+                        if (response.ok) {
+                            // Show success message
+                            const formContainer = contactForm.parentElement;
+                            formContainer.innerHTML = `
+                                <div class="py-8 text-center fade-in visible">
+                                    <div class="text-3xl coffee-accent mb-4">☕</div>
+                                    <h3 class="text-2xl font-semibold mb-3">Thanks for joining!</h3>
+                                    <p class="text-gray-400">We'll notify you when we're ready to launch.</p>
+                                </div>
+                            `;
+                        } else {
+                            // Show error message
+                            console.error('Form submission error:', await response.text());
+                            alert('There was a problem submitting your email. Please try again later.');
+                        }
+                    } else {
+                        // Formspree ID not set up yet - show a message for the site owner
+                        console.warn('Formspree ID not configured. Please replace "your-formspree-id" with your actual Formspree form ID.');
+                        
+                        // Still show success message to the user for testing purposes
+                        const formContainer = contactForm.parentElement;
+                        formContainer.innerHTML = `
+                            <div class="py-8 text-center fade-in visible">
+                                <div class="text-3xl coffee-accent mb-4">☕</div>
+                                <h3 class="text-2xl font-semibold mb-3">Thanks for joining!</h3>
+                                <p class="text-gray-400">We'll notify you when we're ready to launch.</p>
+                            </div>
+                        `;
+                    }
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    alert('There was a problem submitting your email. Please try again later.');
+                }
             }
         });
     }
