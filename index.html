@@ -5,152 +5,307 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cafezn.ai - AI-Powered Video Generation Platform</title>
     <meta name="description" content="Revolutionary AI-powered video generation platform. We're brewing something special - stay connected for launch.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div id="canvas-container"></div>
-    <div class="content">
-        <header>
-            <div class="logo-container">
-                <div class="coffee-icon">☕</div>
-                <h1 class="logo-text">cafezn<span class="accent">.ai</span></h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="main-title">Revolutionizing Video Creation with AI</h1>
-                <p class="subtitle">We're brewing something special. An innovative platform for seamless video creation from scripts or initial ideas.</p>
-                <div class="cta-container">
-                    <div class="brewing-indicator">
-                        <div class="coffee-cup">
-                            <div class="coffee"></div>
-                        </div>
-                        <p>Brewing... Stay connected for launch</p>
-                    </div>
-                    <a href="#contact" class="cta-button">Get Early Access</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="about">
-            <h2>Introducing cafezn<span class="accent">.ai</span></h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>An innovative platform for seamless video creation from scripts or initial ideas. Our multi-agent AI system utilizes multiple specialized AI agents to enhance video production capabilities.</p>
-                    <p>Generate videos effortlessly using scripts, audio, or concepts with your own Clone.</p>
-                </div>
-                <div class="about-image">
-                    <img src="images/video-creation.svg" alt="AI Video Creation" class="feature-img">
-                </div>
-            </div>
-        </section>
-
-        <section id="features" class="features">
-            <h2>Key Features</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>Multi-Agent AI System</h3>
-                    <p>Utilizes multiple AI agents to enhance video production capabilities.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-film"></i>
-                    </div>
-                    <h3>Automated Video Creation</h3>
-                    <p>Generate videos effortlessly using scripts, audio, or concepts.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-sitemap"></i>
-                    </div>
-                    <h3>Storyboarding Features</h3>
-                    <p>Automatically designs and organizes the video flow for better storytelling.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <h3>Scene Generation</h3>
-                    <p>Creates stunning visuals based on text input for compelling narratives.</p>
-                </div>
-            </div>
-        </section>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
         
-        <section class="feature-highlights">
-            <div class="feature-row">
-                <div class="feature-col">
-                    <h2>Multilingual Support</h2>
-                    <p>Supports video production in 25+ languages to reach global audiences.</p>
-                </div>
-                <div class="feature-col">
-                    <h2>Captioning & Voiceovers</h2>
-                    <p>Offers AI-generated narration and subtitles to enhance viewer engagement.</p>
+        body, html {
+            height: 100%;
+            font-size: 16px;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        #particles-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        
+        .content-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: -0.02em;
+            font-weight: 600;
+        }
+
+        .coffee-gradient {
+            background: linear-gradient(to right, #6F4E37, #D4A76A);
+        }
+
+        .coffee-accent {
+            color: #D4A76A;
+        }
+
+        .coffee-dark {
+            color: #6F4E37;
+        }
+
+        .coffee-card {
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(111, 78, 55, 0.2);
+        }
+        
+        @keyframes brew {
+            0% { height: 0; }
+            50% { height: 70%; }
+            100% { height: 50%; }
+        }
+        
+        .animate-brew {
+            animation: brew 3s infinite;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Spline Background -->
+    <div class="spline-container">
+        <iframe src='https://my.spline.design/iphone15procopy-pmwnMexXbAOzhjJgYVtuY6kv/' frameborder='0' width='100%' height='100%'></iframe>
+    </div>
+    
+    <!-- Background Overlay for better content visibility -->
+    <div class="bg-overlay"></div>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <!-- Navigation -->
+        <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+            <div class="container mx-auto px-6 py-6">
+                <div class="flex items-center justify-between">
+                    <div class="logo flex items-center">
+                        <div class="text-2xl coffee-accent">☕</div>
+                        <span class="ml-3 text-xl tracking-tight">cafezn<span class="coffee-accent">.ai</span></span>
+                    </div>
+                    <div class="nav-links hidden md:flex space-x-10 text-sm text-gray-300">
+                        <a href="#about" class="hover:text-[#D4A76A] transition-colors">About</a>
+                        <a href="#features" class="hover:text-[#D4A76A] transition-colors">Features</a>
+                        <a href="#team" class="hover:text-[#D4A76A] transition-colors">Team</a>
+                        <a href="#contact" class="hover:text-[#D4A76A] transition-colors">Contact</a>
+                    </div>
+                    <div>
+                        <a href="#contact" class="cta-button text-sm px-4 py-2 transition-all">
+                            Early Access
+                        </a>
+                    </div>
                 </div>
             </div>
-        </section>
+        </nav>
 
-        <section id="contact" class="contact">
-            <h2>Connect With Us</h2>
-            <p class="contact-text">Interested in early access or have questions? We're brewing something special and will be launching soon.</p>
-            <div class="brewing-status">
-                <div class="coffee-cup-large">
-                    <div class="coffee-large"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="founders">
-            <div class="founders-container">
-                <div class="founder">
-                    <a href="https://www.linkedin.com/in/bbalasubramanian/" target="_blank" class="founder-link">
-                        <div class="founder-img-container">
-                            <img src="images/founder.svg" alt="Babu Balasubramanian" class="founder-img">
-                        </div>
-                        <h3>Babu Balasubramanian</h3>
-                        <p>Founder & Lead Architect</p>
+        <!-- Hero content -->
+        <div class="container mx-auto px-6 pt-16 md:pt-24" id="about">
+            <div class="flex flex-col items-center text-center max-w-3xl mx-auto">
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight mb-6 leading-tight">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#6F4E37] to-[#D4A76A]">Brewing</span> AI-powered video creation
+                </h1>
+                <p class="text-gray-300 text-lg md:text-xl mb-8 max-w-2xl font-normal">
+                    Transform your ideas into compelling videos with our innovative platform that blends AI intelligence with creative storytelling.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 mt-4">
+                    <button class="bg-gradient-to-r from-[#6F4E37] to-[#D4A76A] text-white font-medium rounded-md px-8 py-3 hover:opacity-90 transition-all">
+                        Get started
+                    </button>
+                    <a href="#features" class="flex items-center text-gray-300 hover:text-white transition-colors py-3 px-2 group">
+                        Learn more
+                        <span class="material-symbols-outlined ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
                     </a>
                 </div>
-                <div class="founder">
-                    <a href="https://www.linkedin.com/in/najwaizzatizahari/" target="_blank" class="founder-link">
-                        <div class="founder-img-container">
-                            <img src="images/cofounder.svg" alt="Najwa I. Zahari" class="founder-img">
-                        </div>
-                        <h3>Najwa I. Zahari</h3>
-                        <p>Co-Founder & AI Ethics Lead</p>
-                    </a>
+                
+                <!-- Brewing Animation -->
+                <div class="mt-12 relative">
+                    <div class="w-16 h-12 border-2 border-[#6F4E37] rounded-b-xl mx-auto relative">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#6F4E37] to-[#D4A76A] rounded-b-lg animate-brew h-1/2"></div>
+                        <div class="absolute -right-6 top-3 w-8 h-6 border-2 border-[#6F4E37] rounded-full rounded-bl-none"></div>
+                    </div>
+                    <p class="text-gray-400 mt-4">Brewing something special...</p>
                 </div>
             </div>
-        </section>
-
-        <footer>
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="footer-logo-text">cafezn<span class="accent">.ai</span></span>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 max-w-4xl mx-auto">
+                <div>
+                    <p class="text-4xl font-semibold mb-1 tracking-tight coffee-accent">12+</p>
+                    <p class="text-gray-400 text-base">AI Agents</p>
                 </div>
-                <div class="footer-text">
-                    <p>&copy; 2025 cafezn.ai. All rights reserved.</p>
-                    <p>We're brewing something special.</p>
+                <div>
+                    <p class="text-4xl font-semibold mb-1 tracking-tight coffee-accent">25+</p>
+                    <p class="text-gray-400 text-base">Languages</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-semibold mb-1 tracking-tight coffee-accent">4K</p>
+                    <p class="text-gray-400 text-base">Video Quality</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-semibold mb-1 tracking-tight coffee-accent">100%</p>
+                    <p class="text-gray-400 text-base">Cloud-based</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="mt-32 max-w-6xl mx-auto px-6" id="features">
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-center mb-16">Key features that <span class="coffee-accent">brew</span> excellence</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="coffee-card p-6 rounded-xl transition-all duration-700">
+                    <div class="bg-[#6F4E37]/20 w-12 h-12 flex items-center justify-center rounded-lg mb-4">
+                        <span class="material-symbols-outlined text-[#D4A76A]">smart_toy</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Multi-Agent AI System</h3>
+                    <p class="text-gray-400">Our specialized AI agents work together to enhance video production capabilities.</p>
+                </div>
+                <div class="coffee-card p-6 rounded-xl transition-all duration-700">
+                    <div class="bg-[#6F4E37]/20 w-12 h-12 flex items-center justify-center rounded-lg mb-4">
+                        <span class="material-symbols-outlined text-[#D4A76A]">movie</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Automated Video Creation</h3>
+                    <p class="text-gray-400">Generate videos effortlessly using scripts, audio, or concepts with your own Clone.</p>
+                </div>
+                <div class="coffee-card p-6 rounded-xl transition-all duration-700">
+                    <div class="bg-[#6F4E37]/20 w-12 h-12 flex items-center justify-center rounded-lg mb-4">
+                        <span class="material-symbols-outlined text-[#D4A76A]">storyboard</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Storyboarding Features</h3>
+                    <p class="text-gray-400">Automatically designs and organizes the video flow for better storytelling.</p>
+                </div>
+            </div>
+            
+            <!-- Additional Features -->
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="coffee-card p-6 rounded-xl transition-all duration-700">
+                    <div class="bg-[#6F4E37]/20 w-12 h-12 flex items-center justify-center rounded-lg mb-4">
+                        <span class="material-symbols-outlined text-[#D4A76A]">image</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Scene Generation</h3>
+                    <p class="text-gray-400">Creates stunning visuals based on text input for compelling narratives.</p>
+                </div>
+                <div class="coffee-card p-6 rounded-xl transition-all duration-700">
+                    <div class="bg-[#6F4E37]/20 w-12 h-12 flex items-center justify-center rounded-lg mb-4">
+                        <span class="material-symbols-outlined text-[#D4A76A]">translate</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Multilingual Support</h3>
+                    <p class="text-gray-400">Supports video production in 25+ languages to reach global audiences.</p>
+                </div>
+                <div class="coffee-card p-6 rounded-xl transition-all duration-700">
+                    <div class="bg-[#6F4E37]/20 w-12 h-12 flex items-center justify-center rounded-lg mb-4">
+                        <span class="material-symbols-outlined text-[#D4A76A]">closed_caption</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Captioning & Voiceovers</h3>
+                    <p class="text-gray-400">Offers AI-generated narration and subtitles to enhance viewer engagement.</p>
+                </div>
+                <div class="coffee-card p-6 rounded-xl transition-all duration-700">
+                    <div class="bg-[#6F4E37]/20 w-12 h-12 flex items-center justify-center rounded-lg mb-4">
+                        <span class="material-symbols-outlined text-[#D4A76A]">cloud</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Cloud Processing</h3>
+                    <p class="text-gray-400">All processing happens in the cloud, so you don't need expensive hardware.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Team Section -->
+        <div class="mt-32 max-w-6xl mx-auto px-6" id="team">
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-center mb-16">Meet our <span class="coffee-accent">brew</span> masters</h2>
+            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <a href="https://www.linkedin.com/in/bbalasubramanian/" target="_blank" class="group">
+                    <div class="coffee-card p-8 rounded-xl text-center transition-all group-hover:translate-y-[-10px]">
+                        <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-2 border-[#6F4E37]">
+                            <img src="images/founder.svg" alt="Babu Balasubramanian" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-1">Babu Balasubramanian</h3>
+                        <p class="text-[#D4A76A] mb-4">Founder & Lead Architect</p>
+                        <p class="text-gray-400 text-sm">Over 10 years of experience with Elastic, Apple, and Oracle. Specialized in data security and content analysis.</p>
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/in/najwaizzatizahari/" target="_blank" class="group">
+                    <div class="coffee-card p-8 rounded-xl text-center transition-all group-hover:translate-y-[-10px]">
+                        <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-2 border-[#6F4E37]">
+                            <img src="images/cofounder.svg" alt="Najwa I. Zahari" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-1">Najwa I. Zahari</h3>
+                        <p class="text-[#D4A76A] mb-4">Co-Founder & AI Ethics Lead</p>
+                        <p class="text-gray-400 text-sm">8 years experience as ISO Specialist focusing on Quality Management, Risk Management & Process Optimization.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Contact Section -->
+        <div class="mt-32 max-w-3xl mx-auto px-6 text-center" id="contact">
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-6">Ready to <span class="coffee-accent">brew</span> amazing videos?</h2>
+            <p class="text-gray-300 text-lg mb-12">We're brewing something special and will be launching soon. Join our waitlist to be the first to know.</p>
+            
+            <div class="coffee-card p-8 rounded-xl text-center transition-all duration-700">
+                <h3 class="text-2xl font-semibold mb-6">Join the waitlist</h3>
+                <form id="contact-form" class="flex flex-col md:flex-row gap-4">
+                    <input type="email" placeholder="Your email address" required class="bg-white/10 border border-gray-700 rounded-md px-4 py-3 flex-grow focus:outline-none focus:border-[#D4A76A]">
+                    <button type="submit" class="cta-button font-medium rounded-md px-6 py-3 hover:opacity-90 transition-all">
+                        Get Early Access
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="mt-32 border-t border-gray-800 py-12">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex items-center mb-6 md:mb-0">
+                        <div class="text-xl coffee-accent">☕</div>
+                        <span class="ml-2 text-lg">cafezn<span class="coffee-accent">.ai</span></span>
+                    </div>
+                    <div class="text-gray-400 text-sm">
+                        &copy; 2025 cafezn.ai. All rights reserved. We're brewing something special.
+                    </div>
                 </div>
             </div>
         </footer>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/particles.js"></script>
     <script src="js/main.js"></script>
+    
+    <style>
+        @keyframes brew {
+            0% { height: 0; }
+            50% { height: 70%; }
+            100% { height: 50%; }
+        }
+        
+        .animate-brew {
+            animation: brew 3s infinite;
+        }
+    </style>
 </body>
 </html>
